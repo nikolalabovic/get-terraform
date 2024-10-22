@@ -7,7 +7,7 @@ resource "aws_security_group" "test_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["178.253.192.204/32"]
+    cidr_blocks = ["178.253.192.204/32","0.0.0.0/0"]
   }
   egress {
     from_port   = 0
@@ -37,12 +37,4 @@ resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4" {
   from_port                    = 5432
   ip_protocol                  = "tcp"
   to_port                      = 5432
-}
-
-resource "aws_vpc_security_group_egress_rule" "allow_tls_eg" {
-  security_group_id            = aws_security_group.test_sg.id
-  referenced_security_group_id = aws_security_group.test_sg.id
-  from_port                    = 0
-  ip_protocol                  = "tcp"
-  to_port                      = 65535
 }
